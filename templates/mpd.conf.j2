@@ -1,0 +1,32 @@
+music_directory         "{{ mpd_music_directory }}"
+playlist_directory      "{{ mpd_playlist_directory }}"
+
+db_file                 "{{ mpd_db_file }}"
+sticker_file            "{{ mpd_sticker_file }}"
+state_file              "{{ mpd_state_file }}"
+
+user                    "{{ mpd_user }}"
+bind_to_address         "{{ mpd_bind_to_address }}"
+log_file                "syslog"
+
+restore_paused          "{{ mpd_restore_paused }}"
+auto_update             "{{ mpd_auto_update }}"
+follow_inside_symlinks  "{{ mpd_follow_inside_symlinks }}"
+follow_outside_symlinks "{{ mpd_follow_outside_symlinks }}"
+
+zeroconf_enabled        "yes"
+zeroconf_name           "{{ mpd_name }}"
+
+input {
+    plugin "curl"
+    verify_peer "yes"
+    verify_host "yes"
+}
+
+{% for output in mpd_outputs %}
+audio_output {
+{% for k, v in output.iteritems() %}
+    {{ k }} "{{ v }}"
+{% endfor %}
+}
+{% endfor %}

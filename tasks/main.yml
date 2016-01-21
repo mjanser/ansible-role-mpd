@@ -1,0 +1,31 @@
+---
+- name: ensure mpd is installed
+  dnf:
+    name: "{{ item }}"
+  with_items:
+    - mpd
+    - mpc
+
+- name: ensure mpd is enabled and started
+  service:
+    name: mpd
+    enabled: yes
+    state: started
+  when: mpd_autostart
+
+- name: ensure mpd is configured
+  template:
+    src: mpd.conf.j2
+    dest: /etc/mpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mpd
+
+- name: ensure mpd port is open in firewall
+  firewalld:
+    port: 6600/tcp
+    zone: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items: mpd_firewall_zones
