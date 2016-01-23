@@ -5,6 +5,7 @@ ansible-playbook playbook.yml --syntax-check || exit 1
 ansible-playbook playbook.yml --connection=local || exit 1
 
 systemctl start mpd.service || exit 1
+sleep 1
 mpc version || exit 1
 systemctl stop mpd.service
 
