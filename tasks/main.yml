@@ -1,6 +1,6 @@
 ---
 - name: ensure mpd is installed
-  dnf:
+  package:
     name: "{{ item }}"
   with_items:
     - mpd
@@ -28,4 +28,4 @@
     zone: "{{ item }}"
     permanent: true
     state: enabled
-  with_items: mpd_firewall_zones
+  with_items: "{{ mpd_firewall_zones }}"

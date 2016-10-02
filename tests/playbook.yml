@@ -1,8 +1,0 @@
----
-- hosts: all
-  pre_tasks:
-    - name: ensure rpmfusion-free repository is installed
-      dnf:
-        name: "http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
-  roles:
-    - ansible-role-mpd

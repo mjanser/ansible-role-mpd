@@ -4,7 +4,7 @@ An Ansible role that installs MPD (Music Player Daemon) on Fedora.
 
 ## Requirements
 
-The rpmfusion-free repository has to be installed before running this role.
+The UnitedRPMs or rpmfusion-free repository has to be installed before running this role.
 
 ## Role Variables
 
