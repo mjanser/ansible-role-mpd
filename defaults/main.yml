@@ -1,10 +1,9 @@
 ---
-mpd_name: Music Player Daemon
-
 mpd_outputs:
   - name: "Null Output"
     type: "null"
 
+mpd_name: Music Player Daemon
 mpd_restore_paused: yes
 mpd_auto_update: yes
 mpd_follow_inside_symlinks: yes
@@ -18,7 +17,7 @@ mpd_sticker_file: /var/lib/mpd/sticker.db
 mpd_state_file: /var/lib/mpd/mpdstate
 
 mpd_user: mpd
-mpd_bind_to_address: any
-
 mpd_autostart: false
+
+mpd_bind_to_address: any
 mpd_firewall_zones: []
