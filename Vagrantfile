@@ -1,5 +1,5 @@
 Vagrant.configure('2') do |config|
-  config.vm.box = 'obnox/fedora25-64-lxc'
+  config.vm.box = 'mjanser/fedora25-64-lxc'
   config.vm.hostname = 'ansible-role-mpd-fedora-25'
 
   config.vm.provision "ansible_local" do |ansible|
@@ -10,10 +10,11 @@ Vagrant.configure('2') do |config|
   config.vm.provision 'shell' do |s|
     s.keep_color = true
     s.inline = <<SCRIPT
-systemctl start mpd.service || { echo "could not start mpd" && exit 1; ]
-sleep 1
 mpc version || { echo "could not get version of mpd" && exit 1; }
 systemctl stop mpd.service
+
+echo "127.0.0.1" > /etc/ansible/hosts
+echo "localhost" > /etc/ansible/inventory
 
 cd /vagrant/
 ansible-playbook playbook.yml --connection local 2>&1 | tee /tmp/ansible.log

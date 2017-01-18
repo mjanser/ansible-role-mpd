@@ -6,12 +6,17 @@
     - mpd
     - mpc
 
-- name: ensure mpd is enabled and started
+- name: ensure mpd is enabled and started when it should
   service:
     name: mpd
-    enabled: yes
-    state: started
-  when: mpd_autostart
+    enabled: "{{ mpd_autostart }}"
+    state: "{% if mpd_autostart %}started{% else %}stopped{% endif %}"
+
+- name: ensure mpd socket is enabled when it should
+  service:
+    name: mpd.socket
+    enabled: "{% if mpd_autostart %}no{% else %}yes{% endif %}"
+    state: "{% if mpd_autostart %}stopped{% else %}started{% endif %}"
 
 - name: ensure mpd is configured
   template:
